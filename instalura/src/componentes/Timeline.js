@@ -11,7 +11,7 @@ class Timeline extends React.Component{
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/api/public/fotos/alots')
+        fetch('http://localhost:8080/api/public/fotos/vitor')
             .then(response => response.json())
             .then(fotos => {
                 this.setState({fotos:fotos})
