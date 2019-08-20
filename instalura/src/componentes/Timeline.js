@@ -4,10 +4,26 @@ import React from 'react';
 import Foto from './Foto';
 
 class Timeline extends React.Component{
+
+    constructor(){
+        super();
+        this.state = {fotos: []}
+    }
+
+    componentDidMount() {
+        fetch('http://localhost:8080/api/public/fotos/alots')
+            .then(response => response.json())
+            .then(fotos => {
+                this.setState({fotos:fotos})
+            });
+    }
+
     render() {
         return (
             <div className="fotos container">
-                <Foto/>
+                {
+                    this.state.fotos.map(foto => <Foto key={foto.id} foto={foto} />)
+                }
             </div>
         );
     }
