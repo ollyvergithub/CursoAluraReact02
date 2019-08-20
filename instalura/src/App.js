@@ -13,12 +13,9 @@ function App() {
     return (
         <div id="root">
             <div className="main">
-
                 <Header/>
                 <Timeline/>
-
             </div>
-
         </div>
 );
 }

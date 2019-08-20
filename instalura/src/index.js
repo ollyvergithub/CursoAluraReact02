@@ -13,7 +13,6 @@ ReactDOM.render(
         <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/timeline" exact component={App} />
-
         </Switch>
     </BrowserRouter>,
     document.getElementById('root')
