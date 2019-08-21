@@ -6,6 +6,7 @@ import {BrowserRouter} from "react-router-dom";
 import {Switch, Route, matchPath } from 'react-router-dom'
 import {Redirect} from 'react-router-dom';
 
+
 // corrigir o erro nesta aula
 import createBrowserHistory from 'history/createBrowserHistory';
 
@@ -14,7 +15,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import Login from "./componentes/Login";
 import Logout from "./componentes/Logout";
 
-const validaAutenticacao = () => {
+/*const validaAutenticacao = () => {
     const history = createBrowserHistory();
     const match = matchPath(history.location.pathname,  {path: '/timeline/:login'});
 
@@ -31,19 +32,29 @@ const validaAutenticacao = () => {
     console.log('----------------------------------------');
     console.log('Constante privateRoute', privateRoute);
 
-    return (privateRoute && localStorage.getItem('auth-token')) === null; 
-};
+    return (privateRoute && localStorage.getItem('auth-token')) === null;
+};*/
 
-/*
 // Substitui essa parte pela parte acima para corrigir o erro nesta aula
 function validaAutenticacao(args){
     console.log('Valida Autenticacao da Index.js ', args);
 
-    if(localStorage.getItem('auth-token') != null)
+    const history = createBrowserHistory();
+    const match = matchPath(history.location.pathname,  {path: '/timeline/:login?'});
+
+    const privateRoute = match;
+
+    console.log('----------------------------------------');
+    console.log('Constante history', history);
+
+    console.log('----------------------------------------');
+    console.log('Constante match', match);
+
+    if(match && localStorage.getItem('auth-token') != null)
     {
         return true;
     }
-}*/
+}
 
 ReactDOM.render(
     <BrowserRouter>
@@ -51,17 +62,8 @@ ReactDOM.render(
             <Route path="/" exact={true} component={Login} />
             <Route path="/logout" component={Logout} />
 
-            <Route
-                path="/timeline"
-                render={() => (
-                    validaAutenticacao() ?
-                        (<Redirect to="/?msg=Você precisa estar logado." />) : (<App />)
-                )}
-            />
 
-{/*
-// Substitui essa parte pela parte acima para corrigir o erro nesta aula
-<Route path="/timeline/:login?" render={() => (
+            <Route path="/timeline/:login?" render={() => (
                 validaAutenticacao() ? (
                     <App />
                 ) : (
@@ -73,9 +75,8 @@ ReactDOM.render(
                     />
 
                 )
-            )} />*/}
+            )} />
 
-            {/*Definindo Rota Padrão, caso as demais não sejam chamadas*/}
             <Route component={Login}/>
 
         </Switch>

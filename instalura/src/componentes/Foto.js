@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 // Meus Componentes
 import FotoHeader from './FotoHeader';
 import FotoInfo from './FotoInfo';
