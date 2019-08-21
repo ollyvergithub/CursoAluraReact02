@@ -11,7 +11,10 @@ class Timeline extends React.Component{
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/api/public/fotos/vitor')
+
+        console.log("Peguei o Token do Login.js ", localStorage.getItem('auth-token'));
+
+        fetch(`http://localhost:8080/api/fotos/?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`)
             .then(response => response.json())
             .then(fotos => {
                 this.setState({fotos:fotos})

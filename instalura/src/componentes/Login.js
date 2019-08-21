@@ -23,15 +23,21 @@ class Login extends React.Component{
         fetch('http://localhost:8080/api/public/login', requestInfo)
 
             .then(resposta => {
-
                 if (resposta.ok){
                     return resposta.text();
                 }else{
-                    this.setState({msg: 'Erro ao se logar'})
+                    throw new Error('Erro ao se logar');
                 }
             })
             .then(token => {
                 console.log(token);
+
+                localStorage.setItem('auth-token', token);
+                // Navegação Programática
+                this.props.history.push('/timeline');
+            })
+            .catch(erro => {
+                this.setState({msg: erro.message});
             })
     }
 
