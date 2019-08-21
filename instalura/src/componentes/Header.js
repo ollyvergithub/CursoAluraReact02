@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 class Header extends React.Component{
 
     render() {
@@ -13,6 +13,7 @@ class Header extends React.Component{
                 <form className="header-busca">
                     <input type="text" name="search" placeholder="Pesquisa" className="header-busca-campo"/>
                     <input type="submit" value="Buscar" className="header-busca-submit"/>
+                    <span className="container-logout"><Link to="/logout">Logout</Link></span>
                 </form>
 
                 <nav>

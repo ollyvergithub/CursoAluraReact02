@@ -2,9 +2,13 @@ import React from 'react';
 
 class Login extends React.Component{
 
-    constructor(){
-        super();
-        this.state = {msg: ''}
+    constructor(props){
+        super(props);
+        console.log('Props que vieram da Index.js para o Login.js ', this.props);
+
+        this.state  = {msg: this.props.location.state}
+
+        //this.state = {msg: ''}
     }
 
 

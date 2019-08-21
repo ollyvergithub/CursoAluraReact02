@@ -81,6 +81,18 @@ body {
     color: #5ad4c9;
 }
 
+.container-logout{
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.container-logout a{
+    text-decoration: none;
+    font-weight: bold;
+    color: #069;
+}
+
+
 /*******/
 
 
