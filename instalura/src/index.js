@@ -31,7 +31,7 @@ const validaAutenticacao = () => {
     console.log('----------------------------------------');
     console.log('Constante privateRoute', privateRoute);
 
-    return (privateRoute && localStorage.getItem('auth-token')) === null;
+    return (privateRoute && localStorage.getItem('auth-token')) === null; 
 };
 
 /*
