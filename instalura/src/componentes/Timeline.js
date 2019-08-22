@@ -5,27 +5,57 @@ import Foto from './Foto';
 
 class Timeline extends React.Component{
 
-    constructor(){
-        super();
-        this.state = {fotos: []}
+    constructor(props){
+        super(props);
+        this.state = {fotos: []};
+        this.login = this.props.login;
     }
 
-    componentDidMount() {
+    carregaFotos(props){
 
-        console.log("Peguei o Token do Login.js ", localStorage.getItem('auth-token'));
+        console.log('-------------------------------------------------------------------');
+        console.log('Estou na TIMELINE.js. Parametro Usuario veio da App.js: - carregaFotos()', props);
+        console.log('-------------------------------------------------------------------');
 
-        fetch(`http://localhost:8080/api/fotos/?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`)
+        let urlPerfil;
+
+        if (this.login === undefined){
+            urlPerfil = `http://localhost:8080/api/fotos/?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`
+        }else {
+            console.log("Peguei o Token do Login.js ", localStorage.getItem('auth-token'));
+            urlPerfil = `http://localhost:8080/api/public/fotos/${this.login}`
+        }
+        fetch(urlPerfil)
             .then(response => response.json())
             .then(fotos => {
                 this.setState({fotos:fotos})
             });
     }
 
+    componentDidMount() {
+        this.carregaFotos();
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+
+        console.log('-------------------------------------------------------------------');
+        console.log('Estou na Timeline.js componentWillReceiveProps - nextProps | ', nextProps);
+        console.log('Estou na Timeline.js componentWillReceiveProps - nextContext | ', nextContext);
+        console.log('-------------------------------------------------------------------');
+
+        if (nextProps.login != undefined){
+            this.login = nextProps.login;
+            this.carregaFotos();
+        }
+
+
+    }
+
     render() {
         return (
             <div className="fotos container">
                 {
-                    this.state.fotos.map(foto => <Foto key={foto.id} foto={foto} />)
+                    this.state.fotos.map(foto => <Foto key={foto.id} foto={foto} perfil={this.props.login} />)
                 }
             </div>
         );

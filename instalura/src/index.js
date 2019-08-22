@@ -35,9 +35,11 @@ import Logout from "./componentes/Logout";
     return (privateRoute && localStorage.getItem('auth-token')) === null;
 };*/
 
+
+var var_usuario = '';
+
 // Substitui essa parte pela parte acima para corrigir o erro nesta aula
-function validaAutenticacao(args){
-    console.log('Valida Autenticacao da Index.js ', args);
+function validaAutenticacao(){
 
     const history = createBrowserHistory();
     const match = matchPath(history.location.pathname,  {path: '/timeline/:login?'});
@@ -52,20 +54,21 @@ function validaAutenticacao(args){
 
     if(match && localStorage.getItem('auth-token') != null)
     {
+        var_usuario = match.params;
         return true;
     }
 }
 
 ReactDOM.render(
+
     <BrowserRouter>
         <Switch>
             <Route path="/" exact={true} component={Login} />
             <Route path="/logout" component={Logout} />
 
-
             <Route path="/timeline/:login?" render={() => (
                 validaAutenticacao() ? (
-                    <App />
+                    <App usuario = {var_usuario} />
                 ) : (
                     <Redirect
                         to={{
