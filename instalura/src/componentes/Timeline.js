@@ -1,4 +1,5 @@
 import React from 'react';
+import Pubsub from 'pubsub-js';
 
 // Meus Componentes
 import Foto from './Foto';
@@ -9,6 +10,16 @@ class Timeline extends React.Component{
         super(props);
         this.state = {fotos: []};
         this.login = this.props.login;
+    }
+
+    componentWillMount() {
+        Pubsub.subscribe('pesquisa-de-fotos', (topico, pesquisaDeFotos)=>{
+            console.log("--------------------------------------------------------------------");
+            console.log("Pesquisa de Fotos por Login  que veio da Header.js para a Timeline.js | ", pesquisaDeFotos);
+            console.log("--------------------------------------------------------------------");
+
+            this.setState({fotos: pesquisaDeFotos});
+        })
     }
 
     carregaFotos(props){

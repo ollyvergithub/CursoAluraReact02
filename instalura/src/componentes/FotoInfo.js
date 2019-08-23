@@ -15,8 +15,6 @@ class FotoInfo extends React.Component{
     componentWillMount() {
         Pubsub.subscribe('atualiza-liker', (topico, infoLiker) =>
         {
-
-
             if (this.props.foto.id === infoLiker.fotoId) {
                 const possivelLiker = this.state.likers.find(liker => liker.login === infoLiker.liker.login);
                 if (possivelLiker === undefined){
