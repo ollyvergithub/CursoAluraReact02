@@ -32,7 +32,6 @@ class FotoAtualizacoes extends React.Component{
 
     }
 
-
     render() {
         return (
             <section className="fotoAtualizacoes">
