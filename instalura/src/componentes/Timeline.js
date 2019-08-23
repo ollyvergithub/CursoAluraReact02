@@ -1,5 +1,6 @@
 import React from 'react';
 import Pubsub from 'pubsub-js';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Meus Componentes
 import Foto from './Foto';
@@ -63,9 +64,14 @@ class Timeline extends React.Component{
     render() {
         return (
             <div className="fotos container">
+                <ReactCSSTransitionGroup
+                    transitionName="timeline"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}>
                 {
                     this.state.fotos.map(foto => <Foto key={foto.id} foto={foto} perfil={this.props.login} />)
                 }
+                </ReactCSSTransitionGroup>
             </div>
         );
     }
