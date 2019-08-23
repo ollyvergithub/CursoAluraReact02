@@ -60,8 +60,9 @@ class FotoInfo extends React.Component{
 
                     {
                         this.state.comentarios.map(comentario => {
+
                            return  (
-                               <li className="comentario">
+                               <li key={comentario.id} className="comentario">
                                    <Link to={`/timeline/${comentario.login}`} className="foto-info-autor">{comentario.login} </Link>
                                    {comentario.texto}
                                </li>
