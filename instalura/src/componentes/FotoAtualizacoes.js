@@ -1,4 +1,5 @@
 import React from 'react';
+import Pubsub from 'pubsub-js';
 
 class FotoAtualizacoes extends React.Component{
 
@@ -27,7 +28,10 @@ class FotoAtualizacoes extends React.Component{
                 console.log('Estou na função like() FotoAtualizacoes.js LIKER | ', liker);
                 console.log('-------------------------------------------');
 
-               this.setState({likeada: !this.state.likeada})
+               this.setState({likeada: !this.state.likeada});
+
+               Pubsub.publish('atualiza-liker', {fotoId: this.props.foto.id ,liker});
+
             });
 
     }
