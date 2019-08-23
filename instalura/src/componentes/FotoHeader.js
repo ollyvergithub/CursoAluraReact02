@@ -5,7 +5,7 @@ class  FotoHeader extends React.Component{
     render() {
         return (
             <header className="foto-header">
-                <figure className="foto-usuario">
+                <figure key={this.props.foto.id} className="foto-usuario">
                     <img src={this.props.foto.urlPerfil} alt="foto do usuario"/>
                     <figcaption className="foto-usuario">
                         <Link to={`/timeline/${this.props.foto.loginUsuario}`}>

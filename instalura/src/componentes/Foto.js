@@ -13,7 +13,7 @@ class Foto extends React.Component{
                 <FotoHeader foto={this.props.foto} perfil = {this.props.perfil}/>
                 <img alt="foto" className="foto-src" src={this.props.foto.urlFoto}/>
                 <FotoInfo foto={this.props.foto}/>
-                <FotoAtualizacoes/>
+                <FotoAtualizacoes foto={this.props.foto}/>
             </div>
         );
     }

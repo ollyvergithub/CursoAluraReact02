@@ -8,7 +8,7 @@ class FotoInfo extends React.Component{
                 <div className="foto-info-likes">
                     {
                         this.props.foto.likers.map(liker => {
-                            return (<Link to={`/timeline/${liker.login}`}>{liker.login}, </Link>);
+                            return (<Link key={this.props.foto.id} to={`/timeline/${liker.login}`}>{liker.login}, </Link>);
                         })
                     }
                     curtiram

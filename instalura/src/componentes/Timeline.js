@@ -14,7 +14,7 @@ class Timeline extends React.Component{
     carregaFotos(props){
 
         console.log('-------------------------------------------------------------------');
-        console.log('Estou na TIMELINE.js. Parametro Usuario veio da App.js: - carregaFotos()', props);
+        console.log('Estou na TIMELINE.js. Parametro Usuario veio da App.js: - carregaFotos(props)', props);
         console.log('-------------------------------------------------------------------');
 
         let urlPerfil;
@@ -47,8 +47,6 @@ class Timeline extends React.Component{
             this.login = nextProps.login;
             this.carregaFotos();
         }
-
-
     }
 
     render() {
