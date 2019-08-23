@@ -36,12 +36,38 @@ class FotoAtualizacoes extends React.Component{
 
     }
 
+    enviaComentario(evento){
+        evento.preventDefault();
+
+        const requestInfo = {
+            method: 'POST',
+            body:JSON.stringify({texto: this.comentario.value}),
+            headers: new Headers({
+                'Content-type': 'application/json',
+            })
+
+        };
+
+       fetch(`http://localhost:8080/api/fotos/${this.props.foto.id}/comment?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`, requestInfo)
+       .then(resposta =>{
+           if (resposta.ok){
+               return resposta.json();
+           }else {
+               throw new Error('Não foi possível comentar');
+           }
+        })
+           .then(novoComentario => {
+               Pubsub.publish('novos-comentarios', {fotoId: this.props.foto.id, novoComentario:novoComentario});
+           })
+
+    }
+
     render() {
         return (
             <section className="fotoAtualizacoes">
                 <a onClick={this.like.bind(this)} className={this.state.likeada ? 'fotoAtualizacoes-like-ativo' : 'fotoAtualizacoes-like'}>Likar</a>
-                <form className="fotoAtualizacoes-form">
-                    <input type="text" placeholder="Adicione um comentário..." className="fotoAtualizacoes-form-campo" />
+                <form className="fotoAtualizacoes-form" onSubmit={this.enviaComentario.bind(this)}>
+                    <input name="comentario" ref={input => this.comentario = input} type="text" placeholder="Adicione um comentário..." className="fotoAtualizacoes-form-campo" />
                     <input type="submit" value="Comentar!" className="fotoAtualizacoes-form-submit"/>
                 </form>
 

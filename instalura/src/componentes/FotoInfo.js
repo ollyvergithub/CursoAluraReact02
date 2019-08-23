@@ -7,7 +7,7 @@ class FotoInfo extends React.Component{
     constructor(props){
         super(props);
 
-        this.state = {likers: this.props.foto.likers};
+        this.state = {likers: this.props.foto.likers, comentarios: this.props.foto.comentarios};
         console.log('Estou na Fotoinfo.js constructor() | ', this.state.likers);
 
     }
@@ -15,7 +15,7 @@ class FotoInfo extends React.Component{
     componentWillMount() {
         Pubsub.subscribe('atualiza-liker', (topico, infoLiker) =>
         {
-            console.log('Estou na Fotoinfo.js infoLiker componentWillMount | ', infoLiker);
+
 
             if (this.props.foto.id === infoLiker.fotoId) {
                 const possivelLiker = this.state.likers.find(liker => liker.login === infoLiker.liker.login);
@@ -27,7 +27,17 @@ class FotoInfo extends React.Component{
                     this.setState({likers: novosLikers});
                 }
             }
-        })
+        });
+
+        Pubsub.subscribe('novos-comentarios', (topico, infoComentario) =>{
+            console.log('Estou na Fotoinfo.js componentWillMount | ', infoComentario);
+            
+            if (this.props.foto.id === infoComentario.fotoId){
+                const novosComentarios = this.state.comentarios.concat(infoComentario.novoComentario);
+                this.setState({comentarios: novosComentarios});
+
+            }
+        });
     }
 
     render() {
@@ -51,7 +61,7 @@ class FotoInfo extends React.Component{
                 <ul className="foto-info-comentarios">
 
                     {
-                        this.props.foto.comentarios.map(comentario => {
+                        this.state.comentarios.map(comentario => {
                            return  (
                                <li className="comentario">
                                    <Link to={`/timeline/${comentario.login}`} className="foto-info-autor">{comentario.login} </Link>
@@ -60,7 +70,6 @@ class FotoInfo extends React.Component{
                            );
                         })
                     }
-
                 </ul>
             </div>
         );
