@@ -64,6 +64,7 @@ class Timeline extends React.Component{
     render() {
         return (
             <div className="fotos container">
+
                 <ReactCSSTransitionGroup
                     transitionName="timeline"
                     transitionEnterTimeout={500}
@@ -72,6 +73,7 @@ class Timeline extends React.Component{
                     this.state.fotos.map(foto => <Foto key={foto.id} foto={foto} perfil={this.props.login} />)
                 }
                 </ReactCSSTransitionGroup>
+
             </div>
         );
     }

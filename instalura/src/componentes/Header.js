@@ -5,6 +5,7 @@ import Pubsub from 'pubsub-js';
 class Header extends React.Component{
 
     pesquisaFotosLogin(evento){
+
         evento.preventDefault();
         console.log("--------------------------------------------------------------------");
         console.log("Estou na Header - pesquisaFotosLogin()", this.loginPesquisado.value);
